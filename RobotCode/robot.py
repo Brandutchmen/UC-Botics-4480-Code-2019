@@ -8,7 +8,7 @@ NetworkTables.initialize()
 sd = NetworkTables.getTable("SmartDashboard")
 
 
-class MyRobot(wpilib.IterativeRobot):
+class 4480(wpilib.IterativeRobot):
 
     def robotInit(self):
         #Motors
@@ -46,7 +46,6 @@ class MyRobot(wpilib.IterativeRobot):
             i += 1
             print(i)
 
-
         #Drive
         self.robotDrive.arcadeDrive(self.playerOne.getY(0), self.playerOne.getX(0))
 
@@ -54,4 +53,4 @@ if __name__ == "__main__":
     '''
     This is the end of the code. Don't mess with this part =)
     '''
-    wpilib.run(MyRobot)
+    wpilib.run(4480)
