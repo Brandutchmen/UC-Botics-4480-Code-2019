@@ -8,7 +8,7 @@ NetworkTables.initialize()
 sd = NetworkTables.getTable("SmartDashboard")
 
 
-class 4480(wpilib.IterativeRobot):
+class robot(wpilib.IterativeRobot):
 
     def robotInit(self):
         #Motors
@@ -53,4 +53,4 @@ if __name__ == "__main__":
     '''
     This is the end of the code. Don't mess with this part =)
     '''
-    wpilib.run(4480)
+    wpilib.run(robot)
