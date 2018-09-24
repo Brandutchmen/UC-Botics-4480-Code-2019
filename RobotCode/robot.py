@@ -37,14 +37,8 @@ class robot(wpilib.IterativeRobot):
         '''
         self.robotDrive.arcadeDrive(Forward/Backwards Axis, Rotation axis)
         '''
-        i = 0
-        #This doesn't work yet
-        while True:
-            print('dsTime:', sd.getNumber('dsTime', 'N/A'))
-            sd.putNumber('robotTime', i)
-            time.sleep(1)
-            i += 1
-            print(i)
+
+        print("ping")
 
         #Drive
         self.robotDrive.arcadeDrive(self.playerOne.getY(0), self.playerOne.getX(0))
