@@ -5,7 +5,7 @@ import time
 from networktables import NetworkTables
 
 NetworkTables.initialize()
-sd = NetworkTables.getTable("SmartDashboard")
+table = NetworkTables.getTable("SmartDashboard")
 
 
 class robot(wpilib.IterativeRobot):
