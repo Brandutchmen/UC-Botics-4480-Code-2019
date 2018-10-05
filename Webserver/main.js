@@ -5,6 +5,14 @@ const {app, BrowserWindow} = require('electron')
 // be closed automatically when the JavaScript object is garbage collected.
 let mainWindow
 
+let {PythonShell} = require('python-shell')
+
+PythonShell.run('tornado_server.py', null, function (err) {
+
+//if (err) throw err;
+  console.log('app-main-loaded');
+});
+
 function createWindow () {
   // Create the browser window.
   mainWindow = new BrowserWindow({width: 800, height: 600})

@@ -8,5 +8,9 @@
   },
   "devDependencies": {
     "electron": "^2.0.0"
+  },
+  "dependencies": {
+    "progressbar.js": "^1.0.1",
+    "python-shell": "^1.0.4"
   }
 }
