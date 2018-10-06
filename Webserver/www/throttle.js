@@ -8,6 +8,7 @@ function init() {
     // prevent clipping
     strokeWidth: 5,
     trailWidth: 5,
+    trailColor: '#D3D3D3',
     easing: 'easeInOut',
     duration: 150,
     text: {
