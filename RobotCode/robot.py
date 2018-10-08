@@ -37,11 +37,16 @@ class robot(wpilib.IterativeRobot):
         '''
         self.robotDrive.arcadeDrive(Forward/Backwards Axis, Rotation axis)
         '''
+        NetworkTables.initialize()
+        table = NetworkTables.getTable("SmartDashboard")
 
-        print("ping")
+        print('ControllerY = ', table.getNumber('ctrlY', 'N/A'))
+        table.putNumber('ctrlY', self.playerOne.getY(0))
 
         #Drive
         self.robotDrive.arcadeDrive(self.playerOne.getY(0), self.playerOne.getX(0))
+
+
 
 if __name__ == "__main__":
     '''
