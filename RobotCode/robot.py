@@ -1,6 +1,7 @@
 #!/usr/bin/env python3 # <---- This runs the code
 
 import wpilib
+from wpilib import drive
 import time
 from networktables import NetworkTables
 
@@ -12,14 +13,19 @@ class robot(wpilib.IterativeRobot):
 
     def robotInit(self):
         #Motors
-        self.leftMotor = wpilib.Talon(0) # <-- This is what links our PWM port on the CRIO to a physical ESC.
-        self.rightMotor = wpilib.Talon(1)
+        self.leftMotor1 = wpilib.Talon(0) # <-- This is what links our PWM port on the CRIO to a physical ESC.
+        self.leftMotor2 = wpilib.Talon(1) # <-- This is what links our PWM port on the CRIO to a physical ESC.
+        self.left = wpilib.SpeedControllerGroup(self.leftMotor1, self.leftMotor2)
+
+        self.rightMotor1 = wpilib.Talon(2)
+        self.rightMotor2 = wpilib.Talon(3)
+        self.right = wpilib.SpeedControllerGroup(self.rightMotor1, self.rightMotor2)
 
         #User Input
         self.playerOne = wpilib.XboxController(0)# <-- This is for using Xbox controllers
 
         #Drive
-        self.robotDrive = wpilib.RobotDrive(self.leftMotor, self.rightMotor)
+        self.drive = wpilib.drive.DifferentialDrive(self.left, self.right)
 
     def disabledInit(self):
         pass
@@ -44,7 +50,7 @@ class robot(wpilib.IterativeRobot):
         table.putNumber('ctrlY', self.playerOne.getY(0))
 
         #Drive
-        self.robotDrive.arcadeDrive(self.playerOne.getY(0), self.playerOne.getX(0))
+        self.drive.curvatureDrive(self.playerOne.getY(0), self.playerOne.getX(0)*0.3, 1)
 
 
 
