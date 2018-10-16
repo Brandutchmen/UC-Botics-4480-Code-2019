@@ -46,11 +46,10 @@ class robot(wpilib.IterativeRobot):
         NetworkTables.initialize()
         table = NetworkTables.getTable("SmartDashboard")
 
-        print('ControllerY = ', table.getNumber('ctrlY', 'N/A'))
         table.putNumber('ctrlY', self.playerOne.getY(0))
-
+        table.putNumber('ctrlX', self.playerOne.getX(1))
         #Drive
-        self.robotDrive.curvatureDrive(self.playerOne.getY(0), self.playerOne.getX(0)*0.3, 1)
+        self.robotDrive.curvatureDrive(self.playerOne.getY(0), self.playerOne.getX(1)*0.3, 1)
 
 
 

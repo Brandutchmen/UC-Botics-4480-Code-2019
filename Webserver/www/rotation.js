@@ -2,7 +2,7 @@ var ProgressBar = require('progressbar.js')
 
 function init() {
 
-    var bar = new ProgressBar.Circle(throttle, {
+    var bar = new ProgressBar.Circle(rotation, {
     color: '#14876C',
     // This has to be the same size as the maximum width to
     // prevent clipping
@@ -23,7 +23,7 @@ function init() {
 
       var value = Math.round(circle.value() * 100);
       if (value === 0) {
-        circle.setText('Throttle');
+        circle.setText('Rotation');
       } else {
         circle.setText(value+"%");
       }
@@ -33,14 +33,14 @@ function init() {
   bar.text.style.fontFamily = '"Raleway", Helvetica, sans-serif';
   bar.text.style.fontSize = '2rem';
 
-  var x = NetworkTables.getValue('/SmartDashboard/ctrlY', '0.0');
+  var x = NetworkTables.getValue('/SmartDashboard/ctrlX', '0.0');
   bar.animate(x);  // Value from 0.0 to 1.0
   loop();
 
   function loop() {
 
   //  var x = NetworkTables.getValue('/SmartDashboard/ctrlY');
-    var x = NetworkTables.getValue('/SmartDashboard/ctrlY', '0.0');
+    var x = NetworkTables.getValue('/SmartDashboard/ctrlX', '0.0');
     bar.animate(x);  // Value from 0.0 to 1.0
 
     setTimeout(loop, 100);

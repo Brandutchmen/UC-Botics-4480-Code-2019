@@ -19,6 +19,7 @@ function createWindow () {
 
   // and load the index.html of the app.
   //mainWindow.loadFile('index.html')
+  mainWindow.maximize()
 mainWindow.loadURL('http://127.0.0.1:8888')
   // Open the DevTools.
   // mainWindow.webContents.openDevTools()
