@@ -20,7 +20,6 @@ class Drive(object):
         #turnController PID Loop
         kP = .01
         kI = 0.0001
-        self.counter = 10
 
         turnController = wpilib.PIDController(
             kP,
@@ -42,9 +41,10 @@ class Drive(object):
         autoForwardP = 0.006
         autoForward = wpilib.PIDController(
             autoForwardP,
-            0,
-            0,
-            0,
+            0, # I
+            0, # D
+            0, # F
+            self.gyro,
             output=self.autoForwardOutput,
             )
 
@@ -69,7 +69,7 @@ class Drive(object):
         autoTurn.setInputRange(-180.0, 180.0)
         autoTurn.setOutputRange(-.5, .5)
         autoTurn.setContinuous(True)
-        autoTurn.setPercentTolerance(1.5)
+        autoTurn.setPercentTolerance(0.001)
         self.autoTurn = autoTurn
         #########################
 
@@ -78,7 +78,7 @@ class Drive(object):
 
     def setAutoTurn(self, angle):
         self.autoTurn.setSetpoint(angle)
-
+        
     def autoForwardOutput(self, output):
         self.forwardVelocity = output
 
@@ -117,13 +117,13 @@ class Drive(object):
         elif self.autoTurn.isEnabled() and not self.autoTurn.onTarget():
             self.turnController.disable()
             self.autoForward.disable()
-            self.robotDrive.arcadeDrive(self.autoTurnVelocity * -1, 0, False)
+            self.robotDrive.arcadeDrive(0, self.autoTurnVelocity * -1, False)
 
         else:
             self.turnController.disable()
             self.autoForward.disable()
             self.autoTurn.disable()
-            self.robotDrive.arcadeDrive(posX * -1, posY, False)
+            self.robotDrive.curvatureDrive(posX, posY, 1)
         #####################################
 
 
@@ -139,6 +139,15 @@ class Drive(object):
             self.setTurnControllerPoint(currentAngle - 180)
         else:
             self.setTurnControllerPoint(currentAngle + 180)
+        self.pidEnabled(True)
+
+    def autoOneEighty(self):
+        currentAngle = self.getYaw()
+        if currentAngle >= 0:
+            self.setAutoTurn(currentAngle - 180)
+        else:
+            self.setAutoTurn(currentAngle + 180)
+
 
     def pidEnabled(self, isEnabled):
         if isEnabled:
