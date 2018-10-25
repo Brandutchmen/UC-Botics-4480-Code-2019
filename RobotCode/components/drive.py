@@ -78,7 +78,7 @@ class Drive(object):
 
     def setAutoTurn(self, angle):
         self.autoTurn.setSetpoint(angle)
-        
+
     def autoForwardOutput(self, output):
         self.forwardVelocity = output
 
@@ -123,7 +123,7 @@ class Drive(object):
             self.turnController.disable()
             self.autoForward.disable()
             self.autoTurn.disable()
-            self.robotDrive.curvatureDrive(posX, posY, 1)
+            self.robotDrive.tankDrive(posX, posY)
         #####################################
 
 

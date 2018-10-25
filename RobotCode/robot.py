@@ -73,18 +73,14 @@ class robot(wpilib.IterativeRobot):
         self.table.putNumber('ctrlY', self.left.get())
         self.table.putNumber('ctrlX', -1*self.right.get())
 
-        #xModifier
-        def xModifier():
-            if self.playerOne.getY(0) > 0.15 or self.playerOne.getY(0) < -0.15:
-                return 0.3
-            else:
-                return 1
-
         #lift
-        self.lift.set(self.playerOne.getY(1))
+        self.lift.set(self.playerOne.getYButton()+self.playerOne.getAButton()*-1)
+
+        #Shoot
+        #self.playerTwo.getTriggerAxis(1) + self.playerTwo.getTriggerAxis(0) * -1
 
         #Drive
-        self.drive.masterDrive(self.playerOne.getY(0), self.playerOne.getX(0)*xModifier())
+        self.drive.masterDrive(self.playerOne.getY(0), self.playerOne.getY(1))
 
 
 if __name__ == "__main__":
