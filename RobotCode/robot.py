@@ -32,6 +32,10 @@ class robot(wpilib.IterativeRobot):
         self.rightMotor2 = wpilib.Spark(3)
         self.right = wpilib.SpeedControllerGroup(self.rightMotor1, self.rightMotor2)
 
+        self.liftMotor1 = wpilib.Talon(4)
+        self.liftMotor2 = wpilib.Talon(5)
+        self.liftMotor2.setInverted(True)
+        self.lift = wpilib.SpeedControllerGroup(self.liftMotor1, self.liftMotor2)
         #User Input
         self.playerOne = wpilib.XboxController(0)# <-- This is for using Xbox controllers
 
@@ -64,10 +68,8 @@ class robot(wpilib.IterativeRobot):
         pass
 
     def teleopPeriodic(self):
-        '''
-        self.robotDrive.arcadeDrive(Forward/Backwards Axis, Rotation axis)
-        '''
-        
+
+        #NetworkTables Variables
         self.table.putNumber('ctrlY', self.left.get())
         self.table.putNumber('ctrlX', -1*self.right.get())
 
@@ -78,13 +80,12 @@ class robot(wpilib.IterativeRobot):
             else:
                 return 1
 
+        #lift
+        self.lift.set(self.playerOne.getY(1))
 
         #Drive
-        self.drive.masterDrive(self.playerOne.getY(0), self.playerOne.getX(1)*xModifier())
+        self.drive.masterDrive(self.playerOne.getY(0), self.playerOne.getX(0)*xModifier())
 
 
 if __name__ == "__main__":
-    '''
-    This is the end of the code. Don't mess with this part =)
-    '''
     wpilib.run(robot)
