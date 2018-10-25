@@ -23,7 +23,7 @@ function init() {
 
       var value = Math.round(circle.value() * 100);
       if (value === 0) {
-        circle.setText('Rotation');
+        circle.setText('Right');
       } else {
         circle.setText(value+"%");
       }
